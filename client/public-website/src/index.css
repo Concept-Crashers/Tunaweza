@@ -18,14 +18,23 @@
 
   --color-ink: #23332f;
   --color-muted: #687571;
-  --color-green: #1d6255;
-  --color-green-dark: #154d43;
-  --color-coral: #a54732;
-  --color-peach: #f5e1d3;
+  --color-brand-blue: #065ebd;
+  --color-brand-green: #4cc554;
+  --color-brand-magenta: #dc034a;
+  --color-brand-purple: #930068;
+  --color-brand-purple-light: #9b0072;
+  --color-brand-yellow: #f2d52e;
+  --color-brand-blue-dark: #064b96;
+  --color-brand-green-dark: #256d35;
+  --color-brand-magenta-dark: #a00038;
+  --color-green: #17623b;
+  --color-green-dark: #123f2b;
+  --color-coral: #a60043;
+  --color-peach: #f7e3ea;
   --color-cream: #fffefa;
   --color-warm: #f8f4ec;
   --color-line: #e7e6df;
-  --focus-ring: #ba573a;
+  --focus-ring: #065ebd;
 }
 
 * {

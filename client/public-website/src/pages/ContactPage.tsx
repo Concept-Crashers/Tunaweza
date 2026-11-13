@@ -8,7 +8,7 @@ import { Button } from '../components/ui/button'
 const enquirySchema = z.object({
   name: z.string().trim().min(2, 'Please enter your name.').max(100),
   email: z.string().trim().email('Enter a valid email address.').max(254),
-  topic: z.enum(['general', 'services', 'partnership', 'volunteering']),
+  topic: z.enum(['general', 'services', 'enrolment', 'partnership', 'volunteering']),
   message: z.string().trim().min(10, 'Please add a little more detail.').max(1200),
 })
 
@@ -42,18 +42,18 @@ function ContactPage() {
         <div className="container contact-content__grid">
           <div className="contact-details">
             <h2>Let’s start with a conversation.</h2>
-            <p>Current contact details are being confirmed. This preview form does not send or store messages.</p>
+            <p>These details are listed on Tunaweza&apos;s existing website and should be reconfirmed before launch. This preview form does not send or store messages.</p>
             <div className="contact-detail">
               <span><MapPin aria-hidden="true" size={18} /></span>
-              <div><strong>Visit the centre</strong><small>Address pending confirmation</small></div>
+              <div><strong>Visit the centre</strong><small>Plot 1211 Papaya Rise, Kampala, Uganda</small></div>
             </div>
             <div className="contact-detail">
               <span><Phone aria-hidden="true" size={18} /></span>
-              <div><strong>Call the team</strong><small>Telephone pending confirmation</small></div>
+              <div><strong>Call the team</strong><small>+256 787 197884</small></div>
             </div>
             <div className="contact-detail">
               <span><Mail aria-hidden="true" size={18} /></span>
-              <div><strong>Send an email</strong><small>Email address pending confirmation</small></div>
+              <div><strong>Send an email</strong><small>info@tunaweza.co.ug</small></div>
             </div>
             <div className="contact-safeguarding">
               <strong>A note about privacy</strong>
@@ -81,6 +81,7 @@ function ContactPage() {
               <select {...register('topic')}>
                 <option value="general">A general question</option>
                 <option value="services">Services & programmes</option>
+                <option value="enrolment">Enrolment information</option>
                 <option value="partnership">Partnership</option>
                 <option value="volunteering">Volunteering</option>
               </select>
