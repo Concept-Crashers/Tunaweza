@@ -63,7 +63,10 @@ function ContactPage() {
             </div>
             <div className="contact-detail">
               <span><Phone aria-hidden="true" size={18} /></span>
-              <div><strong>Call the team</strong><small>+256 787 197884</small></div>
+              <div>
+                <strong>Call the team</strong>
+                <small><a href="tel:+256787197884">+256 787 197884</a> <span aria-hidden="true">|</span> <a href="tel:+256752600196">+256 752 600196</a></small>
+              </div>
             </div>
             <div className="contact-detail">
               <span><Mail aria-hidden="true" size={18} /></span>

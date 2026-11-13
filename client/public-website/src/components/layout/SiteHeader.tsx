@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, MapPin, Menu, Phone, X } from 'lucide-react'
+import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa'
 import { Link, NavLink } from 'react-router-dom'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '../ui/button'
@@ -15,11 +16,18 @@ function SiteHeader() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="preview-banner">
         <div className="container preview-banner__inner">
-          <p className="preview-banner__social-label">Connect with Tunaweza</p>
+          <p className="preview-banner__address"><MapPin aria-hidden="true" size={14} /> Plot 1211 Papaya Rise, Kampala, Uganda</p>
+          <div className="preview-banner__contacts" aria-label="Call Tunaweza">
+            <Phone aria-hidden="true" size={14} />
+            <a href="tel:+256787197884">+256 787 197884</a>
+            <span aria-hidden="true">|</span>
+            <a href="tel:+256752600196">+256 752 600196</a>
+          </div>
           <div className="preview-banner__socials" role="group" aria-label="Social profile placeholders">
-            <span><span className="preview-banner__social-mark" aria-hidden="true">f</span> Facebook <small>Coming soon</small></span>
-            <span><span className="preview-banner__social-mark" aria-hidden="true">IG</span> Instagram <small>Coming soon</small></span>
-            <span><span className="preview-banner__social-mark" aria-hidden="true">YT</span> YouTube <small>Coming soon</small></span>
+            <p className="preview-banner__social-label">Connect with Tunaweza</p>
+            <span><FaFacebookF aria-hidden="true" /> Facebook <small>Coming soon</small></span>
+            <span><FaInstagram aria-hidden="true" /> Instagram <small>Coming soon</small></span>
+            <span><FaYoutube aria-hidden="true" /> YouTube <small>Coming soon</small></span>
           </div>
         </div>
       </div>

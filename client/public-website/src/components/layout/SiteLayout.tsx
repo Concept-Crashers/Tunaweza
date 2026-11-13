@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import SiteFooter from './SiteFooter'
 import SiteHeader from './SiteHeader'
+import WhatsAppFloat from './WhatsAppFloat'
 
 function SiteLayout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation()
@@ -21,6 +22,7 @@ function SiteLayout({ children }: { children: ReactNode }) {
         {children}
       </motion.main>
       <SiteFooter />
+      <WhatsAppFloat />
     </>
   )
 }

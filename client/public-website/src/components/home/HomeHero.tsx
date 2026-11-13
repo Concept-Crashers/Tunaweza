@@ -121,7 +121,6 @@ function HomeHero() {
       </div>
       <div className="container home-hero__foot">
         <span>DIGNITY <i /> RESPECT <i /> INDEPENDENCE</span>
-        <span>Unsplash stock photography · not Tunaweza participants</span>
       </div>
     </section>
   )
