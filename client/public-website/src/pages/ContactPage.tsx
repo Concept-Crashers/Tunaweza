@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 import { Button } from '../components/ui/button'
 
@@ -16,13 +17,18 @@ type EnquiryValues = z.infer<typeof enquirySchema>
 
 function ContactPage() {
   const [previewSubmitted, setPreviewSubmitted] = useState(false)
+  const [searchParams] = useSearchParams()
+  const serviceTitle = searchParams.get('service')?.slice(0, 100)
   const {
     formState: { errors },
     handleSubmit,
     register,
   } = useForm<EnquiryValues>({
     resolver: zodResolver(enquirySchema),
-    defaultValues: { topic: 'general' },
+    defaultValues: {
+      topic: searchParams.get('topic') === 'services' ? 'services' : 'general',
+      message: serviceTitle ? `I’d like to ask about ${serviceTitle}.` : '',
+    },
   })
 
   const onSubmit = (_values: EnquiryValues) => {

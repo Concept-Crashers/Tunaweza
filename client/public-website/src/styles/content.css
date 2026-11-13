@@ -424,9 +424,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .service-detail__photo {
-    grid-row: 1;
-  }
 }
 
 @media (max-width: 520px) {

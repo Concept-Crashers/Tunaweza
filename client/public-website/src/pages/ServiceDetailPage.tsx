@@ -12,6 +12,10 @@ function ServiceDetailPage() {
   if (!service) return <NotFoundPage />
 
   const Icon = service.icon
+  const enquiryParams = new URLSearchParams({
+    topic: 'services',
+    service: service.title,
+  })
 
   return (
     <>
@@ -37,7 +41,7 @@ function ServiceDetailPage() {
               <li>What should we know about scheduling and costs?</li>
             </ul>
             <Button asChild size="large">
-              <Link to="/contact">Ask about {service.title} <ArrowRight aria-hidden="true" size={17} /></Link>
+              <Link to={`/contact?${enquiryParams.toString()}`}>Ask about {service.title} <ArrowRight aria-hidden="true" size={17} /></Link>
             </Button>
           </aside>
         </div>

@@ -484,7 +484,7 @@
   display: flex;
   min-height: 48px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: .6rem;
   padding: .45rem .6rem;
   color: var(--color-ink);
@@ -501,6 +501,32 @@
 .service-group li a > span {
   display: grid;
   gap: .12rem;
+}
+
+.service-group li .service-group__number {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  color: var(--color-brand-blue-dark);
+  background: #e7f0fc;
+  border: 1px solid #c9dcf4;
+  border-radius: 50%;
+  font-size: .59rem;
+  font-weight: 600;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+}
+
+.service-group li a:hover .service-group__number {
+  color: #fff;
+  background: var(--color-brand-blue);
+  border-color: var(--color-brand-blue);
+}
+
+.service-group li .service-group__copy {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .service-group li strong {

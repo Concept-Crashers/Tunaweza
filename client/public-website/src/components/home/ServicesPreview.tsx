@@ -67,7 +67,10 @@ function ServicesPreview() {
                   {services.filter(({ slug }) => group.slugs.includes(slug)).map((service) => (
                     <li key={service.slug}>
                       <Link to={`/services/${service.slug}`}>
-                        <span>
+                        <span className="service-group__number" aria-hidden="true">
+                          {String(services.indexOf(service) + 1).padStart(2, '0')}
+                        </span>
+                        <span className="service-group__copy">
                           <strong>{service.title}</strong>
                           <small>Information &amp; next steps</small>
                         </span>
