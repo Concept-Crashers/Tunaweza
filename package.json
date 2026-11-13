@@ -1,0 +1,13 @@
+{
+  "name": "tunaweza-platform",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "client/public-website"
+  ],
+  "scripts": {
+    "dev:public": "npm run dev --workspace public-website",
+    "build:public": "npm run build --workspace public-website",
+    "lint:public": "npm run lint --workspace public-website"
+  }
+}
