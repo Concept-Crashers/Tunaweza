@@ -21,6 +21,14 @@ function ContactPage() {
   const prefersReducedMotion = useReducedMotion()
   const [searchParams] = useSearchParams()
   const serviceTitle = searchParams.get('service')?.slice(0, 100)
+  const requestedTopic = searchParams.get('topic')
+  const defaultTopic: EnquiryValues['topic'] =
+    requestedTopic === 'services' ||
+    requestedTopic === 'enrolment' ||
+    requestedTopic === 'partnership' ||
+    requestedTopic === 'volunteering'
+      ? requestedTopic
+      : 'general'
   const {
     formState: { errors },
     handleSubmit,
@@ -28,7 +36,7 @@ function ContactPage() {
   } = useForm<EnquiryValues>({
     resolver: zodResolver(enquirySchema),
     defaultValues: {
-      topic: searchParams.get('topic') === 'services' ? 'services' : 'general',
+      topic: defaultTopic,
       message: serviceTitle ? `I’d like to ask about ${serviceTitle}.` : '',
     },
   })
