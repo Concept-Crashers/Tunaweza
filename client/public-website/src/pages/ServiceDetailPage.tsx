@@ -1,7 +1,6 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { Button } from '../components/ui/button'
-import DemoPhoto from '../components/content/DemoPhoto'
 import PageHero from '../components/content/PageHero'
 import { services } from '../data/siteContent'
 import NotFoundPage from './NotFoundPage'
@@ -27,16 +26,23 @@ function ServiceDetailPage() {
               Get in touch with the centre for current information about this
               service, how to access it, and any next steps for your family.
             </p>
-            <Button asChild size="large">
-              <Link to="/contact">Ask about this service <ArrowRight aria-hidden="true" size={17} /></Link>
-            </Button>
-            <Link className="back-link" to="/services"><ArrowLeft aria-hidden="true" size={16} /> All services</Link>
           </div>
-          <DemoPhoto
-            className="service-detail__photo"
-            src="/images/child-activity-demo.jpg"
-            alt="A child playing with a toy in an Unsplash stock photo used only to demonstrate the design; the child is not a Tunaweza participant."
-          />
+          <aside className="service-detail__next-steps">
+            <p className="section-label"><span className="section-label__line" />Your next step</p>
+            <h2>What to ask the team</h2>
+            <p>Contact Tunaweza to confirm current details for {service.title.toLowerCase()}.</p>
+            <ul>
+              <li>Is this service currently available?</li>
+              <li>How can a family access or be referred?</li>
+              <li>What should we know about scheduling and costs?</li>
+            </ul>
+            <Button asChild size="large">
+              <Link to="/contact">Ask about {service.title} <ArrowRight aria-hidden="true" size={17} /></Link>
+            </Button>
+          </aside>
+        </div>
+        <div className="container service-detail__back">
+          <Link className="back-link" to="/services"><ArrowLeft aria-hidden="true" size={16} /> All services</Link>
         </div>
       </section>
     </>

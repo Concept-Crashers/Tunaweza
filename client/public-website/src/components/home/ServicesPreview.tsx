@@ -1,34 +1,88 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import DemoPhoto from '../content/DemoPhoto'
 import { services } from '../../data/siteContent'
-import SectionHeading from '../content/SectionHeading'
+
+const serviceGroups = [
+  {
+    title: 'Assessment & therapy',
+    description: 'Assessment and therapy areas listed by the centre.',
+    slugs: [
+      'assessment',
+      'physiotherapy',
+      'occupational-behavioural-therapy',
+      'speech-language-therapy',
+      'music-therapy',
+    ],
+  },
+  {
+    title: 'Learning & development',
+    description: 'Education and individualised learning support.',
+    slugs: ['special-education'],
+  },
+  {
+    title: 'Family & community support',
+    description: 'Psychosocial support and community outreach.',
+    slugs: ['psychosocial-support', 'outreach'],
+  },
+]
 
 function ServicesPreview() {
   return (
     <section className="section services-preview">
       <div className="container">
-        <SectionHeading
-          eyebrow="How we support"
-          title="Support shaped around"
-          highlight="each child."
-          action={<Link className="text-link" to="/services">View services <ArrowUpRight aria-hidden="true" size={17} /></Link>}
-        />
-        <div className="service-grid">
-          {services.map(({ slug, title, summary, icon: Icon }, index) => (
-            <Link className="service-card" to={`/services/${slug}`} key={slug}>
-              <div className="service-card__meta">
-                <span className="service-card__icon"><Icon aria-hidden="true" size={21} strokeWidth={1.7} /></span>
-                <span className="service-card__number">0{index + 1}</span>
-              </div>
-              <h3>{title}</h3>
-              <p>{summary}</p>
-              <span className="service-card__link">Explore <ArrowRight aria-hidden="true" size={17} /></span>
-            </Link>
-          ))}
+        <div className="services-preview__heading">
+          <div>
+            <p className="section-label"><span className="section-label__line" />How we support</p>
+            <h2>Support shaped around <em>each child.</em></h2>
+            <p>Explore the support areas listed by Tunaweza, then ask the team what is currently available and how to access it.</p>
+          </div>
+          <Link className="ui-button ui-button--primary ui-button--default" to="/contact">
+            Ask about services <ArrowRight aria-hidden="true" size={17} />
+          </Link>
+        </div>
+        <div className="services-preview__content">
+          <div className="services-preview__feature">
+            <DemoPhoto
+              className="services-preview__photo"
+              src="/images/child-activity-demo.jpg"
+              alt="A child engaged in a play activity in an Unsplash stock photo used for this demo; the child is not a Tunaweza participant."
+            />
+            <p className="services-preview__photo-note">
+              Demo photo only. It does not show a Tunaweza service or participant.
+            </p>
+            <div className="services-preview__note">
+              <strong>Looking for the right next step?</strong>
+              <p>Contact the centre to ask about current services, availability, and how families can access support.</p>
+            </div>
+          </div>
+          <div className="services-preview__groups">
+            {serviceGroups.map((group) => (
+              <section className="service-group" key={group.title}>
+                <div className="service-group__heading">
+                  <h3>{group.title}</h3>
+                  <p>{group.description}</p>
+                </div>
+                <ul>
+                  {services.filter(({ slug }) => group.slugs.includes(slug)).map((service) => (
+                    <li key={service.slug}>
+                      <Link to={`/services/${service.slug}`}>
+                        <span>
+                          <strong>{service.title}</strong>
+                          <small>Information &amp; next steps</small>
+                        </span>
+                        <ArrowRight aria-hidden="true" size={16} />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
         </div>
         <p className="content-note">
-          Service names and descriptions are a starting point from the project overview;
-          current delivery and availability must be confirmed by Tunaweza.
+          Categories are for easier browsing and should be confirmed by Tunaweza.
+          Service delivery and availability also need confirmation.
         </p>
       </div>
     </section>
