@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import DemoPhoto from '../components/content/DemoPhoto'
@@ -5,6 +6,8 @@ import PageHero from '../components/content/PageHero'
 import { services } from '../data/siteContent'
 
 function ServicesPage() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <>
       <PageHero
@@ -27,12 +30,21 @@ function ServicesPage() {
           </div>
           <div className="service-list">
             {services.map(({ slug, title, summary, icon: Icon }, index) => (
-              <Link className="service-list__item" to={`/services/${slug}`} key={slug}>
-                <span className="service-list__number">{String(index + 1).padStart(2, '0')}</span>
-                <span className="service-list__icon"><Icon aria-hidden="true" size={21} /></span>
-                <span className="service-list__copy"><strong>{title}</strong><small>{summary}</small></span>
-                <ArrowRight aria-hidden="true" size={20} />
-              </Link>
+              <motion.div
+                className="service-list__row"
+                key={slug}
+                initial={prefersReducedMotion ? false : { opacity: 0, x: -14 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: prefersReducedMotion ? 0 : .35, delay: prefersReducedMotion ? 0 : index * .04 }}
+              >
+                <Link className="service-list__item" to={`/services/${slug}`}>
+                  <span className="service-list__number">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="service-list__icon"><Icon aria-hidden="true" size={21} /></span>
+                  <span className="service-list__copy"><strong>{title}</strong><small>{summary}</small></span>
+                  <ArrowRight aria-hidden="true" size={20} />
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>

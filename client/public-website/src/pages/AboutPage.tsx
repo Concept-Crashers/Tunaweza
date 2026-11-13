@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/button'
@@ -7,6 +8,8 @@ import PageHero from '../components/content/PageHero'
 const values = ['Dignity', 'Respect', 'Justice', 'Excellence', 'Independence']
 
 function AboutPage() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <div className="about-page">
       <PageHero
@@ -60,10 +63,16 @@ function AboutPage() {
           </div>
           <ul className="about-values__list">
             {values.map((value, index) => (
-              <li key={value}>
+              <motion.li
+                key={value}
+                initial={prefersReducedMotion ? false : { opacity: 0, scale: .94 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: prefersReducedMotion ? 0 : .3, delay: prefersReducedMotion ? 0 : index * .06 }}
+              >
                 <span>0{index + 1}</span>
                 <strong>{value}</strong>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>
@@ -76,21 +85,36 @@ function AboutPage() {
             <h2>Support that sees the <em>whole picture.</em></h2>
           </div>
           <div className="about-approach__grid">
-            <article>
+            <motion.article
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: prefersReducedMotion ? 0 : .35 }}
+            >
               <span>01</span>
               <h3>For each child</h3>
               <p>Therapy and day programmes support children with disabilities and their individual needs.</p>
-            </article>
-            <article>
+            </motion.article>
+            <motion.article
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: prefersReducedMotion ? 0 : .35, delay: prefersReducedMotion ? 0 : .08 }}
+            >
               <span>02</span>
               <h3>Alongside families</h3>
               <p>Families are part of the holistic approach to supporting a child’s needs and development.</p>
-            </article>
-            <article>
+            </motion.article>
+            <motion.article
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: prefersReducedMotion ? 0 : .35, delay: prefersReducedMotion ? 0 : .16 }}
+            >
               <span>03</span>
               <h3>With dignity and respect</h3>
               <p>The centre’s values affirm the dignity, respect, justice, excellence, and independence children and families deserve.</p>
-            </article>
+            </motion.article>
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import SectionHeading from '../content/SectionHeading'
@@ -24,6 +25,8 @@ const newsItems = [
 ]
 
 function StoriesPreview() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <section className="section stories-preview">
       <div className="container">
@@ -35,7 +38,14 @@ function StoriesPreview() {
         />
         <div className="news-grid">
           {newsItems.map((item, index) => (
-            <article className="news-card" key={item.title}>
+            <motion.article
+              className="news-card"
+              key={item.title}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: prefersReducedMotion ? 0 : .4, delay: prefersReducedMotion ? 0 : index * .08 }}
+            >
               <div className={`news-card__art news-card__art--${index + 1}`} aria-hidden="true">
                 <span>{item.category}</span>
                 <span className="news-card__art-mark">{String(index + 1).padStart(2, '0')}</span>
@@ -46,7 +56,7 @@ function StoriesPreview() {
                 <p>{item.summary}</p>
                 <Link className="text-link" to="/news-events">Read updates <ArrowRight aria-hidden="true" size={15} /></Link>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
         <p className="content-note">

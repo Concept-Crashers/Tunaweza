@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react'
 import { useForm } from 'react-hook-form'
@@ -17,6 +18,7 @@ type EnquiryValues = z.infer<typeof enquirySchema>
 
 function ContactPage() {
   const [previewSubmitted, setPreviewSubmitted] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
   const [searchParams] = useSearchParams()
   const serviceTitle = searchParams.get('service')?.slice(0, 100)
   const {
@@ -46,7 +48,13 @@ function ContactPage() {
       </section>
       <section className="contact-content section-space">
         <div className="container contact-content__grid">
-          <div className="contact-details">
+          <motion.div
+            className="contact-details"
+            initial={prefersReducedMotion ? false : { opacity: 0, x: -14 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0 : .4 }}
+          >
             <h2>Let’s start with a conversation.</h2>
             <p>These details are listed on Tunaweza&apos;s existing website and should be reconfirmed before launch. This preview form does not send or store messages.</p>
             <div className="contact-detail">
@@ -65,9 +73,17 @@ function ContactPage() {
               <strong>A note about privacy</strong>
               <p>Please don’t include a child’s diagnosis, medical history, or other sensitive details in this preview form.</p>
             </div>
-          </div>
+          </motion.div>
 
-          <form className="contact-form" noValidate onSubmit={handleSubmit(onSubmit)}>
+          <motion.form
+            className="contact-form"
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0 : .4, delay: prefersReducedMotion ? 0 : .08 }}
+          >
             <div className="contact-form__heading">
               <span className="contact-form__step">01 / SAY HELLO</span>
               <h2>What would you like to talk about?</h2>
@@ -110,7 +126,7 @@ function ContactPage() {
                 service must be connected before launch.
               </p>
             )}
-          </form>
+          </motion.form>
         </div>
       </section>
     </>

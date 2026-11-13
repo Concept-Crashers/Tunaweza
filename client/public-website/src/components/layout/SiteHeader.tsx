@@ -15,11 +15,12 @@ function SiteHeader() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="preview-banner">
         <div className="container preview-banner__inner">
-          <span className="preview-dot" aria-hidden="true" />
-          <p>
-            <strong>Website preview</strong>
-            <span>Draft content and stock photos are for demonstration only.</span>
-          </p>
+          <p className="preview-banner__social-label">Connect with Tunaweza</p>
+          <div className="preview-banner__socials" role="group" aria-label="Social profile placeholders">
+            <span><span className="preview-banner__social-mark" aria-hidden="true">f</span> Facebook <small>Coming soon</small></span>
+            <span><span className="preview-banner__social-mark" aria-hidden="true">IG</span> Instagram <small>Coming soon</small></span>
+            <span><span className="preview-banner__social-mark" aria-hidden="true">YT</span> YouTube <small>Coming soon</small></span>
+          </div>
         </div>
       </div>
       <header className="site-header">

@@ -1,4 +1,6 @@
+import { useEffect, useRef, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
+import { animate, motion, useInView, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import DemoPhoto from '../content/DemoPhoto'
 import { services } from '../../data/siteContent'
@@ -27,11 +29,48 @@ const serviceGroups = [
   },
 ]
 
+function ServiceCounter({ value }: { value: number }) {
+  const counterRef = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(counterRef, { once: true, amount: 0.8 })
+  const prefersReducedMotion = useReducedMotion()
+  const [count, setCount] = useState(prefersReducedMotion ? value : 0)
+
+  useEffect(() => {
+    if (!isInView) return
+    if (prefersReducedMotion) {
+      setCount(value)
+      return
+    }
+
+    const controls = animate(0, value, {
+      duration: 0.75,
+      ease: 'easeOut',
+      onUpdate: (current) => setCount(Math.floor(current)),
+    })
+
+    return () => controls.stop()
+  }, [isInView, prefersReducedMotion, value])
+
+  return (
+    <span className="service-group__number" ref={counterRef} aria-hidden="true">
+      {String(count).padStart(2, '0')}
+    </span>
+  )
+}
+
 function ServicesPreview() {
+  const prefersReducedMotion = useReducedMotion()
+  const reveal = {
+    initial: prefersReducedMotion ? false : { opacity: 0, y: 18 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.45, ease: 'easeOut' as const },
+  }
+
   return (
     <section className="section services-preview">
       <div className="container">
-        <div className="services-preview__heading">
+        <motion.div className="services-preview__heading" {...reveal}>
           <div>
             <p className="section-label"><span className="section-label__line" />How we support</p>
             <h2>Support shaped around <em>each child.</em></h2>
@@ -40,9 +79,9 @@ function ServicesPreview() {
           <Link className="ui-button ui-button--primary ui-button--default" to="/contact">
             Ask about services <ArrowRight aria-hidden="true" size={17} />
           </Link>
-        </div>
+        </motion.div>
         <div className="services-preview__content">
-          <div className="services-preview__feature">
+          <motion.div className="services-preview__feature" {...reveal}>
             <DemoPhoto
               className="services-preview__photo"
               src="/images/child-activity-demo.jpg"
@@ -55,10 +94,15 @@ function ServicesPreview() {
               <strong>Looking for the right next step?</strong>
               <p>Contact the centre to ask about current services, availability, and how families can access support.</p>
             </div>
-          </div>
+          </motion.div>
           <div className="services-preview__groups">
-            {serviceGroups.map((group) => (
-              <section className="service-group" key={group.title}>
+            {serviceGroups.map((group, groupIndex) => (
+              <motion.section
+                className="service-group"
+                key={group.title}
+                {...reveal}
+                transition={{ ...reveal.transition, delay: prefersReducedMotion ? 0 : groupIndex * 0.12 }}
+              >
                 <div className="service-group__heading">
                   <h3>{group.title}</h3>
                   <p>{group.description}</p>
@@ -67,9 +111,7 @@ function ServicesPreview() {
                   {services.filter(({ slug }) => group.slugs.includes(slug)).map((service) => (
                     <li key={service.slug}>
                       <Link to={`/services/${service.slug}`}>
-                        <span className="service-group__number" aria-hidden="true">
-                          {String(services.indexOf(service) + 1).padStart(2, '0')}
-                        </span>
+                        <ServiceCounter value={services.indexOf(service) + 1} />
                         <span className="service-group__copy">
                           <strong>{service.title}</strong>
                           <small>Information &amp; next steps</small>
@@ -79,7 +121,7 @@ function ServicesPreview() {
                     </li>
                   ))}
                 </ul>
-              </section>
+              </motion.section>
             ))}
           </div>
         </div>

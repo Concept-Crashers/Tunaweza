@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import PageHero from '../components/content/PageHero'
 import DemoPhoto from '../components/content/DemoPhoto'
 
@@ -17,6 +18,8 @@ const demoPhotos = [
 ]
 
 function GalleryPage() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <>
       <PageHero
@@ -31,7 +34,18 @@ function GalleryPage() {
             These Unsplash photos are temporary design samples, not images of Tunaweza children, families, staff, or programmes. Replace with approved media before launch.
           </p>
           <div className="gallery-grid">
-            {demoPhotos.map((photo) => <DemoPhoto key={photo.src} {...photo} className="gallery-photo" />)}
+            {demoPhotos.map((photo, index) => (
+              <motion.div
+                className="gallery-grid__item"
+                key={photo.src}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: prefersReducedMotion ? 0 : .35, delay: prefersReducedMotion ? 0 : index * .07 }}
+              >
+                <DemoPhoto {...photo} className="gallery-photo" />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

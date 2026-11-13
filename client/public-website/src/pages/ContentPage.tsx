@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/button'
@@ -5,6 +6,8 @@ import PageHero from '../components/content/PageHero'
 import type { ContentPageData } from '../data/pages'
 
 function ContentPage({ page }: { page: ContentPageData }) {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <>
       <PageHero
@@ -26,13 +29,20 @@ function ContentPage({ page }: { page: ContentPageData }) {
             )}
             <div className="content-sections">
               {page.sections.map((section, index) => (
-                <article className="content-section" key={section.title}>
+                <motion.article
+                  className="content-section"
+                  key={section.title}
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : .35, delay: prefersReducedMotion ? 0 : index * .05 }}
+                >
                   <span className="content-section__number">{String(index + 1).padStart(2, '0')}</span>
                   <div>
                     <h2>{section.title}</h2>
                     <p>{section.body}</p>
                   </div>
-                </article>
+                </motion.article>
               ))}
             </div>
             <div className="content-page__cta">

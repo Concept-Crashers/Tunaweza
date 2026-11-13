@@ -1,8 +1,11 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import PageHero from '../components/content/PageHero'
 
 function NewsPage() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <>
       <PageHero
@@ -12,7 +15,13 @@ function NewsPage() {
         description="News, newsletters, and events will be shared here after details are confirmed."
       />
       <section className="section empty-content">
-        <div className="container empty-content__card">
+        <motion.div
+          className="container empty-content__card"
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : .4 }}
+        >
           <span className="empty-content__mark" aria-hidden="true">T</span>
           <p className="section-label"><span className="section-label__line" />Coming soon</p>
           <h2>Updates are being prepared.</h2>
@@ -22,7 +31,7 @@ function NewsPage() {
             the migration and approval review.
           </p>
           <Link className="text-link" to="/contact">Contact the team <ArrowRight aria-hidden="true" size={16} /></Link>
-        </div>
+        </motion.div>
       </section>
     </>
   )
