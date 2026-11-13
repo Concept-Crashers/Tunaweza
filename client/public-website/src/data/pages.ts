@@ -13,19 +13,6 @@ export type ContentPageData = {
 }
 
 export const contentPages: Record<string, ContentPageData> = {
-  about: {
-    eyebrow: 'About Tunaweza',
-    title: 'Making your child’s world',
-    highlight: 'better.',
-    intro: 'Tunaweza Children’s Centre is a registered non-profit organisation in Kampala, Uganda, supporting children with disabilities through therapy and day programmes.',
-    notice: 'This page uses information supplied from the existing public website. Confirm the organisation profile and approved wording before launch.',
-    sections: [
-      { title: 'A holistic approach', body: 'Tunaweza describes its approach as holistic, supporting each child and their family around their individual needs.' },
-      { title: 'Our values', body: 'Dignity, respect, justice, excellence, and independence guide the centre’s stated approach.' },
-      { title: 'Our people', body: 'Leadership, board, and team profiles will appear after each person approves their biography and any photograph.' },
-      { title: 'Our history', body: 'The centre’s history and milestones will be added after review with Tunaweza.' },
-    ],
-  },
   programmes: {
     eyebrow: 'Programmes',
     title: 'Learning through',

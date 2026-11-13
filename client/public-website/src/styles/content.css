@@ -56,7 +56,7 @@
   height: 48px;
   place-items: center;
   color: #fff;
-  background: var(--color-green);
+  background: var(--color-brand-blue);
   border-radius: 15px 15px 15px 4px;
   font-size: .77rem;
   font-weight: 600;
@@ -118,7 +118,7 @@
 .content-page__cta {
   margin-top: 2rem;
   padding: 1.5rem;
-  background: #f3f5ef;
+  background: #f0f5fc;
   border-radius: 13px;
 }
 
@@ -191,8 +191,8 @@
   width: 45px;
   height: 45px;
   place-items: center;
-  color: var(--color-green);
-  background: #eaf1e9;
+  color: var(--color-brand-blue-dark);
+  background: #e9f1fb;
   border-radius: 13px;
 }
 
@@ -214,7 +214,7 @@
 }
 
 .service-list__item > svg {
-  color: var(--color-green);
+  color: var(--color-brand-blue-dark);
 }
 
 .service-detail {
@@ -234,8 +234,8 @@
   height: 52px;
   margin: 0 0 1rem;
   place-items: center;
-  color: var(--color-green);
-  background: #eaf1e9;
+  color: var(--color-brand-blue-dark);
+  background: #e9f1fb;
   border-radius: 15px;
 }
 
@@ -267,7 +267,7 @@
   align-items: center;
   gap: .45rem;
   margin-left: 1rem;
-  color: var(--color-green);
+  color: var(--color-brand-blue-dark);
   font-size: .75rem;
   font-weight: 600;
   text-decoration: none;
@@ -321,7 +321,7 @@
   margin-bottom: 1.2rem;
   place-items: center;
   color: #fff;
-  background: var(--color-green);
+  background: var(--color-brand-blue);
   border-radius: 16px 16px 16px 4px;
   font-family: Georgia, serif;
   font-size: 1.8rem;

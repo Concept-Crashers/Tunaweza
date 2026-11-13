@@ -39,8 +39,8 @@
   height: 42px;
   flex: 0 0 auto;
   place-items: center;
-  color: var(--color-green);
-  background: #eaf1e9;
+  color: var(--color-brand-blue-dark);
+  background: #e9f1fb;
   border-radius: 12px;
 }
 
@@ -96,7 +96,7 @@
 .contact-form__step {
   display: block;
   margin-bottom: .7rem;
-  color: var(--color-green);
+  color: var(--color-brand-blue-dark);
   font-size: .62rem;
   font-weight: 600;
   letter-spacing: .11em;
@@ -154,8 +154,8 @@
 .form-status {
   margin: 0;
   padding: .7rem .8rem;
-  color: #244e40;
-  background: #eaf1e9;
+  color: var(--color-brand-blue-dark);
+  background: #e9f1fb;
   border-radius: 7px;
   font-size: .7rem;
 }

@@ -4,16 +4,24 @@ import { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
 
 const values = ['Dignity', 'Respect', 'Justice', 'Excellence', 'Independence']
+const heroBackgrounds = [
+  '/images/children-playing-demo.jpg',
+  '/images/classroom-demo.jpg',
+  '/images/child-activity-demo.jpg',
+]
 
 function useTypedValue() {
-  const [value, setValue] = useState(values[0])
+  const [value, setValue] = useState('')
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setValue(values[0])
+      return
+    }
 
     let wordIndex = 0
-    let characterIndex = values[0].length
-    let deleting = true
+    let characterIndex = 0
+    let deleting = false
     let timeout = 0
 
     const tick = () => {
@@ -41,18 +49,44 @@ function useTypedValue() {
       timeout = window.setTimeout(tick, deleting ? 58 : 105)
     }
 
-    timeout = window.setTimeout(tick, 1700)
+    timeout = window.setTimeout(tick, 120)
     return () => window.clearTimeout(timeout)
   }, [])
 
   return value
 }
 
+function useRotatingBackground() {
+  const [activeBackground, setActiveBackground] = useState(0)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const interval = window.setInterval(() => {
+      setActiveBackground((current) => (current + 1) % heroBackgrounds.length)
+    }, 6500)
+
+    return () => window.clearInterval(interval)
+  }, [])
+
+  return activeBackground
+}
+
 function HomeHero() {
   const typedValue = useTypedValue()
+  const activeBackground = useRotatingBackground()
 
   return (
     <section className="home-hero">
+      <div className="home-hero__backgrounds" aria-hidden="true">
+        {heroBackgrounds.map((image, index) => (
+          <div
+            className={`home-hero__background${index === activeBackground ? ' is-active' : ''}`}
+            key={image}
+            style={{ backgroundImage: `url("${image}")` }}
+          />
+        ))}
+      </div>
       <div className="container home-hero__grid">
         <div className="home-hero__copy">
           <p className="eyebrow"><span /> Tunaweza Children&apos;s Centre · Kampala, Uganda</p>
@@ -62,7 +96,10 @@ function HomeHero() {
           <span className="visually-hidden">
             A holistic approach rooted in dignity, respect, justice, excellence, and independence.
           </span>
-          <h1>Making your child&apos;s world <em>better.</em></h1>
+          <h1>
+            <span>Making your child&apos;s</span>
+            <span>world <em>better.</em></span>
+          </h1>
           <p className="home-hero__intro">
             Tunaweza Children&apos;s Centre supports children with disabilities
             through therapy and day programmes shaped around the needs of each
@@ -84,7 +121,7 @@ function HomeHero() {
       </div>
       <div className="container home-hero__foot">
         <span>DIGNITY <i /> RESPECT <i /> INDEPENDENCE</span>
-        <span>Unsplash stock background · not Tunaweza participants</span>
+        <span>Unsplash stock photography · not Tunaweza participants</span>
       </div>
     </section>
   )

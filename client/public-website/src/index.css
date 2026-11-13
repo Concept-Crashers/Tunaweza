@@ -7,7 +7,7 @@
 
 :root {
   font-family: "Poppins", sans-serif;
-  color: #23332f;
+  color: #1d2b3c;
   background: #fffefa;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,23 +16,23 @@
   font-optical-sizing: auto;
   font-weight: 400;
 
-  --color-ink: #23332f;
-  --color-muted: #687571;
+  --color-ink: #1d2b3c;
+  --color-muted: #637083;
   --color-brand-blue: #065ebd;
+  --color-brand-blue-light: #b8d6ff;
   --color-brand-green: #4cc554;
   --color-brand-magenta: #dc034a;
   --color-brand-purple: #930068;
   --color-brand-purple-light: #9b0072;
   --color-brand-yellow: #f2d52e;
   --color-brand-blue-dark: #064b96;
+  --color-brand-navy: #07366b;
   --color-brand-green-dark: #256d35;
   --color-brand-magenta-dark: #a00038;
-  --color-green: #17623b;
-  --color-green-dark: #123f2b;
   --color-coral: #a60043;
   --color-peach: #f7e3ea;
   --color-cream: #fffefa;
-  --color-warm: #f8f4ec;
+  --color-warm: #f0f5fc;
   --color-line: #e7e6df;
   --focus-ring: #065ebd;
 }
@@ -84,7 +84,7 @@ textarea:focus-visible {
 
 ::selection {
   color: #fff;
-  background: var(--color-green);
+  background: var(--color-brand-blue);
 }
 
 @media (prefers-reduced-motion: reduce) {
